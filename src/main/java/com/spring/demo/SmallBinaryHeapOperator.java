@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @Author: Created by bonismo@hotmail.com on 2019/7/19 10:49 AM
- * @Description:
+ * @Description: 构建最小堆
  * @Version: 1.0
  * @Link: https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653195207&idx=2&sn=12689c6c1a92e7ec3cce4d423019ec2a&chksm=8c99f91dbbee700b8e760d06b27582037ab0713295dacf2b5a7a7f954c0032fe860aa0bf8b74&scene=21#wechat_redirect
  * 二叉堆：完全二叉树，顺序存储，数组形式
@@ -23,6 +23,7 @@ public class SmallBinaryHeapOperator {
         int childIndex = array.length - 1;
         int parentIndex = (childIndex - 1) / 2;
         // 保存插入叶子节点值
+        // 一个优化的点，就是父节点和孩子节点做连续交换时，并不一定要真的交换，只需要先把交换一方的值存入temp变量，做单向覆盖，循环结束后，再把temp的值存入交换后的最终位置。
         int temp = array[childIndex];
         // 当子节点索引大于0（还有父节点时）且插入叶子节点值小于当前父节点值进行交换
         while (childIndex > 0 && temp < array[parentIndex]) {
@@ -53,7 +54,7 @@ public class SmallBinaryHeapOperator {
                 childIndex++;
             }
 
-            // 如果父节点小于任何子节点，跳出
+            // 如果父节点小于等于任何子节点，跳出
             if (temp <= array[childIndex]) {
                 break;
             }
@@ -73,12 +74,29 @@ public class SmallBinaryHeapOperator {
         }
     }
 
+    public static void heapSort(int[] array) {
+        buildHeap(array);
+        System.out.println(Arrays.toString(array));
+        // 循环删除堆顶元素，移到集合尾部，调节堆产生新的堆顶。
+        // 最小堆从尾部依次删除，自动倒序排序。
+        for (int i = array.length - 1; i > 0; i--) {
+            int temp = array[i];
+            array[i] = array[0];
+            array[0] = temp;
+            downAdjust(array, 0, i);
+        }
+        Arrays.sort(array);
+    }
+
     public static void main(String[] args) {
         int[] array = new int[]{1, 3, 2, 6, 5, 7, 8, 9, 10, 0};
         upAdjust(array);
-        System.out.println(Arrays.toString(array));
+        System.out.println("Small Binary Heap : " + Arrays.toString(array));
         int[] disorder = new int[]{7, 1, 3, 10, 5, 2, 8, 9, 6};
         buildHeap(disorder);
-        System.out.println(Arrays.toString(disorder));
+        System.out.println("Create Small Binary Heap : " + Arrays.toString(disorder));
+        int[] sortArray = new int[]{1, 3, 2, 6, 5, 7, 8, 9, 10, 0};
+        heapSort(sortArray);
+        System.out.println("Sort Array : " + Arrays.toString(sortArray));
     }
 }
