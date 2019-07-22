@@ -6,6 +6,7 @@ import java.util.Stack;
  * @Author: Created by bonismo@hotmail.com on 2019/7/22 11:47 AM
  * @Description: 用栈模拟队列
  * @Version: 1.0
+ * @Link: https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653195750&idx=1&sn=231558735ddf64a9c10ad721ad537ea2&chksm=8c99ff3cbbee762a37e74e42c585688bf6fbfe70422d723b29219d1d9bbdf524217c97e2228b&scene=21#wechat_redirect
  */
 public class QueueWithStack {
 
