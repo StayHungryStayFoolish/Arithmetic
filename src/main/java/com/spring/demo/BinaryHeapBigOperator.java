@@ -8,9 +8,10 @@ import java.util.Arrays;
  * @Version: 1.0
  * @Link: https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653195208&idx=1&sn=e3d6559402148458f0a4993b47d8bc6f&chksm=8c99f912bbee7004625a0b204acc8484acbdf4f1b18953e7ff5acbea958ec002d8c8ea072792&scene=21#wechat_redirect
  */
-public class BigBinaryHeapOperator {
+public class BinaryHeapBigOperator {
 
     /**
+     * 下沉调整，将小于子节点元素下沉
      * @param array
      * @param parentIndex
      * @param length
@@ -28,7 +29,7 @@ public class BigBinaryHeapOperator {
             }
             array[parentIndex] = array[childIndex];
             parentIndex = childIndex;
-            childIndex = 2 * parentIndex + 1;
+            childIndex = 2 * childIndex + 1;
         }
         array[parentIndex] = temp;
     }

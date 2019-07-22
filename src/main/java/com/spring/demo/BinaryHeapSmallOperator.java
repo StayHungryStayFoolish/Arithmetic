@@ -12,7 +12,7 @@ import java.util.Arrays;
  * 父节点下标是: floor(i-1)/2
  * 最后一个非叶子节点下标: (array.length - 2) / 2
  */
-public class SmallBinaryHeapOperator {
+public class BinaryHeapSmallOperator {
 
     /**
      * 节点上浮调整
@@ -39,7 +39,7 @@ public class SmallBinaryHeapOperator {
     }
 
     /**
-     * 节点下沉调整
+     * 如果父节点大于子节点，父节点下沉调整
      *
      * @param array       原二叉堆
      * @param parentIndex 下沉父节点下标索引
@@ -98,5 +98,10 @@ public class SmallBinaryHeapOperator {
         int[] sortArray = new int[]{1, 3, 2, 6, 5, 7, 8, 9, 10, 0};
         heapSort(sortArray);
         System.out.println("Sort Array : " + Arrays.toString(sortArray));
+
+//        int[] a1 = new int[]{3, 5, 10, 2, 7};
+        int[] a1 = new int[]{7, 3, 10, 5, 7};
+        buildHeap(a1);
+        System.out.println(Arrays.toString(a1));
     }
 }
