@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @Author: Created by bonismo@hotmail.com on 2019/7/22 12:33 PM
- * @Description: 优先队列，优先弹出最大元素
+ * @Description: 构建最大堆，使用优先队列，优先弹出最大元素
  * @Version: 1.0
  * @link: https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653195301&idx=1&sn=9d380bbf3c507ab684ff51596673268f&chksm=8c99feffbbee77e97fe047bdfd4afa8084f09d28df8516a6436207c13fed2c8c5366a8c5677e&scene=21#wechat_redirect
  */

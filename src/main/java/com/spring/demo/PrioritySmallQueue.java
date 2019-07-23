@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @Author: Created by bonismo@hotmail.com on 2019/7/22 4:38 PM
- * @Description:
+ * @Description: 构建最小堆，使用优先队列输出最小元素
  * @Version: 1.0
  */
 public class PrioritySmallQueue {
@@ -16,6 +16,10 @@ public class PrioritySmallQueue {
         this.array = new int[5];
     }
 
+    /**
+     * 入队
+     * @param element 元素
+     */
     private void enQueue(int element) {
         if (size >= array.length) {
             resize();
@@ -24,12 +28,19 @@ public class PrioritySmallQueue {
         upAdjust();
     }
 
+    /**
+     * 最小元素出队
+     * @return 优先队列最小元素
+     */
     private int deQueue() throws Exception {
         if (size < 0) {
             throw new Exception("The Queue is empty !");
         }
+        // 取最小堆得第一个元素
         int head = array[0];
+        // 将最后一个元素移到第一位
         array[0] = array[--size];
+        // 重新构建最小堆
         buildHeap(array);
         return head;
     }
@@ -49,6 +60,10 @@ public class PrioritySmallQueue {
         array[childIndex] = temp;
     }
 
+    /**
+     * 构建最小堆
+     * @param array 无序数组
+     */
     private void buildHeap(int[] array) {
         // 根据最后一个非叶子节点下标递减
         // 最后一个非叶子节点下标: (array.length - 2) / 2
