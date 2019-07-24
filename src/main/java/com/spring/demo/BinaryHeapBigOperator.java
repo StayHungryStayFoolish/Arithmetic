@@ -12,9 +12,9 @@ public class BinaryHeapBigOperator {
 
     /**
      * 下沉调整，将小于子节点元素下沉
-     * @param array
-     * @param parentIndex
-     * @param length
+     * @param array 待调整的堆
+     * @param parentIndex 要下沉几点
+     * @param length 堆的有效大小
      */
     public static void downAdjust(int[] array, int parentIndex, int length) {
         int temp = array[parentIndex];

@@ -7,7 +7,7 @@ import java.util.Arrays;
  * @Description: 删除 K 个数字获取最小值
  * @Version: 1.0
  */
-public class DeleteDigits {
+public class K_DeleteDigits {
 
     public static String removeKDigits(String num, int k) {
         int newLen = num.length() - k;

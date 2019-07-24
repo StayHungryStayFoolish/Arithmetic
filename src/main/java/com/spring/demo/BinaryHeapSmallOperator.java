@@ -43,6 +43,7 @@ public class BinaryHeapSmallOperator {
      *
      * @param array       原二叉堆
      * @param parentIndex 下沉父节点下标索引
+     * @param length 堆得有效大小
      */
     public static void downAdjust(int[] array, int parentIndex, int length) {
         // 保存父节点值
