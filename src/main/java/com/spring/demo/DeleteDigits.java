@@ -11,6 +11,10 @@ public class DeleteDigits {
 
     public static String removeKDigits(String num, int k) {
         int newLen = num.length() - k;
+        // 当删除数字个数 > 数字长度直接返回
+        if (newLen < 0) {
+            return null;
+        }
 
         char[] stack = new char[num.length()];
 
@@ -45,7 +49,7 @@ public class DeleteDigits {
     public static void main(String[] args) {
         System.out.println("Delete K Count Digits : " + removeKDigits("19534762", 5));
         System.out.println("Delete K Count Digits : " + removeKDigits("30200", 1));
-        System.out.println("Delete K Count Digits : " + removeKDigits("11", 2));
+        System.out.println("Delete K Count Digits : " + removeKDigits("11", 3));
         System.out.println("Delete K Count Digits : " + removeKDigits("541270936", 3));
     }
 }
