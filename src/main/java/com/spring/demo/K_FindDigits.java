@@ -9,8 +9,9 @@ import java.util.Arrays;
  * @Version: 1.0
  * @Link: https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653196576&idx=2&sn=482f6678841c0ff40e3847a7d31714cd&chksm=8c99e3fabbee6aec84dd5ceb3f37c4754c68d7605db37bf86e9bf96c97b90647a83750bf72af&mpshare=1&scene=23&srcid=#rd
  * 1. 排序法
- * 2. 使用堆特性
- * 3. 分治法
+ * 2. 插入法
+ * 3. 二叉堆最小堆顶，使用堆特性
+ * 4. 分治法
  */
 public class K_FindDigits {
 

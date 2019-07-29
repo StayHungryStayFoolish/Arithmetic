@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author Created by bonismo@hotmail.com on 2019/7/12 10:53 PM
- * @Description:
+ * @Description: 快速排序挖坑法
  * @Version: 1.0
  * @link https://blog.csdn.net/libaineu2004/article/details/82253412
  * https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653195042&idx=1&sn=2b0915cd2298be9f2163cc90a3d464da&chksm=8c99f9f8bbee70eef627d0f5e5b80a604221abb3a1b5617b397fa178582dcb063c9fb6f904b3&scene=21#wechat_redirect

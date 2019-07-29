@@ -25,7 +25,7 @@ public class SortPractice {
                 }
             }
         }
-        System.out.println("Count : "+count);
+        System.out.println("Count : " + count);
         return array;
     }
 
@@ -61,6 +61,25 @@ public class SortPractice {
                 preIndex--;
             }
             array[preIndex + 1] = current;
+        }
+        return array;
+    }
+
+    public static int[] insertionSortTwo(int[] array) {
+        if (array.length == 0) {
+            return array;
+        }
+        for (int i = 0; i < array.length - 1; i++) {
+            int value = array[i];
+            int j = 0;
+            for (j = i - 1; j >= 0; j--) {
+                if (array[j] > value) {
+                    array[j + 1] = array[j];
+                } else {
+                    break;
+                }
+            }
+            array[j + 1] = value;
         }
         return array;
     }
