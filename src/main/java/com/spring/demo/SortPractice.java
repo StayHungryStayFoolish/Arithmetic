@@ -135,12 +135,16 @@ public class SortPractice {
         int[] result = new int[left.length + right.length];
         for (int index = 0, i = 0, j = 0; index < result.length; index++) {
             if (i >= left.length) {
+                //如果左边的首位下标大于中部下标，证明左边的数据已经排完了
                 result[index] = right[j++];
             } else if (j >= right.length) {
+                //如果右边的首位下标大于了数组长度，证明右边的数据已经排完了。
                 result[index] = left[i++];
             } else if (left[i] > right[j]) {
+                //将右边的首位排入，然后右边的下标指针+1。
                 result[index] = right[j++];
             } else {
+                //将左边的首位排入，然后左边的下标指针+1。
                 result[index] = left[i++];
             }
         }
@@ -186,9 +190,9 @@ public class SortPractice {
     public static void main(String[] args) {
         int[] array = new int[]{9, 8, 1, 7, 2, 3, 5, 4, 6, 0};
 //        int[] result = insertionSort(array);
-//        int[] result = mergeSort(array);
+        int[] result = mergeSort(array);
 //        int[] result = quickSort(array, 0, array.length - 1);
 //        int[] result = bubbleSort(array);
-//        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(result));
     }
 }
