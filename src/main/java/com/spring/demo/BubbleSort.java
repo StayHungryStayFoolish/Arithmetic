@@ -59,7 +59,7 @@ public class BubbleSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{2, 3, 4, 5, 6, 7, 8, 1};
+        int[] arr = {5, 10, 30, 2, 0, 9};
         bubbleSortOptimize(arr);
         System.out.println(Arrays.toString(arr));
     }
