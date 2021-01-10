@@ -1,4 +1,4 @@
-package ink.bonismo.notebook.arithmetic.sort;
+package ink.bonismo.notebook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
