@@ -1,4 +1,4 @@
-package ink.bonismo.notebook.arithmetic;
+package ink.bonismo.notebook.arithmetic.sort;
 
 /**
  * @Author: Created by bonismo@hotmail.com on 2019/7/23 2:57 PM

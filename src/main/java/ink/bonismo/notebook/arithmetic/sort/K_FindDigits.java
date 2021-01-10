@@ -1,4 +1,4 @@
-package ink.bonismo.notebook.arithmetic;
+package ink.bonismo.notebook.arithmetic.sort;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Arrays;
