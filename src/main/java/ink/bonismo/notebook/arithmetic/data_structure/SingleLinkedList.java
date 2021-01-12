@@ -55,7 +55,7 @@ public class SingleLinkedList<E> {
         if (index <= 0) {
             first = new Node<>(val, first);
         } else {
-            Node prev = findNodeAtIndex(index - 1);
+            Node<E> prev = findNodeAtIndex(index - 1);
             if (prev == null) {
                 return;
             }
