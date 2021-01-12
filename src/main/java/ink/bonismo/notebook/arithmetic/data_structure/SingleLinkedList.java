@@ -1,7 +1,11 @@
 package ink.bonismo.notebook.arithmetic.data_structure;
 
-import org.w3c.dom.Node;
-
+/**
+ * 1. 定义一个单项链表，包含长度,节点
+ * 2. 定义一个节点，包含元素、下一个节点
+ * 3. 实现 add、addFirst、addLast、delete、remove、sort、reverse 方法
+ * @param <E>
+ */
 public class SingleLinkedList<E> {
 
     private int size;
@@ -52,9 +56,11 @@ public class SingleLinkedList<E> {
     }
 
     private void addAtIndex(int index, E val) {
+        // 当 index 为负数或零时，添加到头部
         if (index <= 0) {
             first = new Node<>(val, first);
         } else {
+            // 当索引大于零时，查到当前索引的上一个节点
             Node<E> prev = findNodeAtIndex(index - 1);
             if (prev == null) {
                 return;
@@ -82,11 +88,13 @@ public class SingleLinkedList<E> {
         return result.toString();
     }
 
+    // 合法索引校验
     private boolean rangeCheck(int index) {
         return !(index < 0 || index > size - 1);
     }
 
 
+    // 循环遍历 index 所在节点
     private Node<E> findNodeAtIndex(int index) {
         if (!rangeCheck(index)) {
             return null;
@@ -103,10 +111,16 @@ public class SingleLinkedList<E> {
         private E data;
         private Node<E> next;
 
+        /**
+         * 初始化头节点
+         */
         public Node(E data) {
             this.data = data;
         }
 
+        /**
+         * 初始化非头部节点
+         */
         public Node(E data, Node next) {
             this(data);
             this.next = next;
