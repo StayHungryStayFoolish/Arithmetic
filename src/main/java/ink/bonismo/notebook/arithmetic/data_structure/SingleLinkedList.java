@@ -1,9 +1,12 @@
 package ink.bonismo.notebook.arithmetic.data_structure;
 
+import java.util.List;
+
 /**
  * 1. 定义一个单项链表，包含长度,节点
  * 2. 定义一个节点，包含元素、下一个节点
  * 3. 实现 add、addFirst、addLast、delete、remove、sort、reverse 方法
+ *
  * @param <E>
  */
 public class SingleLinkedList<E> {
@@ -44,15 +47,19 @@ public class SingleLinkedList<E> {
             return;
         }
         if (index == 0) {
-            first = first.next;
+            Node<E> next = first.next;
+            first = null; // help GC
+            first = next;
         } else {
             Node<E> prev = findNodeAtIndex(index - 1);
             if (prev == null) {
                 return;
             }
-            prev.next = prev.next.next;
-            size--;
+            Node<E> next = prev.next;
+            prev.next = null; // help GC
+            prev.next = next.next;
         }
+        size--;
     }
 
     private void addAtIndex(int index, E val) {
@@ -121,7 +128,7 @@ public class SingleLinkedList<E> {
         /**
          * 初始化非头部节点
          */
-        public Node(E data, Node next) {
+        public Node(E data, Node<E> next) {
             this(data);
             this.next = next;
         }
@@ -130,22 +137,31 @@ public class SingleLinkedList<E> {
     public static void main(String[] args) {
         SingleLinkedList<String> list = new SingleLinkedList<>();
         list.addTail("a");
-        list.addTail("f");
         list.addTail("b");
-        list.addTail("f");
+        list.addTail("c");
+        list.addTail("d");
         list.addTail("e");
+        list.addTail("f");
 
+        System.out.println(list.size);
         System.out.println(list.toString());
-        list.remove("f");
+        list.deleteAtIndex(0);
+        System.out.println(list.size);
         System.out.println(list.toString());
-
-        SingleLinkedList<Integer> linkedList = new SingleLinkedList<>();
-        linkedList.addTail(1);
-        linkedList.addTail(2);
-        linkedList.addTail(3);
-        linkedList.addTail(4);
-        linkedList.addTail(5);
-
-        System.out.println(linkedList.toString());
+        list.deleteAtIndex(1);
+        System.out.println(list.size);
+        System.out.println(list.toString());
+        list.deleteAtIndex(list.size - 1);
+        System.out.println(list.size);
+        System.out.println(list.toString());
+//
+//        SingleLinkedList<Integer> linkedList = new SingleLinkedList<>();
+//        linkedList.addTail(1);
+//        linkedList.addTail(2);
+//        linkedList.addTail(3);
+//        linkedList.addTail(4);
+//        linkedList.addTail(5);
+//
+//        System.out.println(linkedList.toString());
     }
 }
