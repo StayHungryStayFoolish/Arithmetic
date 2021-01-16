@@ -1,12 +1,13 @@
 package ink.bonismo.notebook.arithmetic.data_structure;
 
-import java.util.List;
-
 /**
  * 1. 定义一个单项链表，包含长度,节点
  * 2. 定义一个节点，包含元素、下一个节点
  * 3. 实现 add、addFirst、addLast、delete、remove、sort、reverse 方法
- *
+ * 单向节点特点：
+ * 1. 添加节点，需要根据初始节点和非初始节点两种情况操作
+ * 2. 删除节点，操作 prev node，设置 prev.next = null，并且将 prev next 指针修改为删除节点的下一个指针
+ * 3. 查找节点，根据初始节点一次遍历
  * @param <E>
  */
 public class SingleLinkedList<E> {
@@ -21,11 +22,49 @@ public class SingleLinkedList<E> {
         addTail(val);
     }
 
-    public boolean remove(Object o) {
+    /**
+     * 时间复杂度优化为：O(n)
+     * 避免循环每次 i 都调用 findByIndex 循环整个 index 范围，O(n2)
+     */
+    public boolean delete(E item) {
+        Node<E> prev = first;
+        Node<E> node = first;
         for (int i = 0; i < size; i++) {
-            Node<E> result = findNodeAtIndex(i);
+            if (i == 0) {
+                if (item == first.item) {
+                    first = null; // help GC
+                    first = node.next;
+                    size--;
+                    return true;
+                }
+            } else {
+                if (node == null) {
+                    return false;
+                }
+                if (item == node.item) {
+                    Node<E> temp = prev.next;
+                    prev.next = null; // help GC
+                    prev.next = temp.next;
+                    size--;
+                    return true;
+                }
+            }
+            // 记录当前节点
+            prev = node;
+            // 指针下移
+            node = node.next;
+        }
+        return false;
+    }
+
+    /**
+     * 时间复杂度：O(n2)
+     */
+    public boolean remove(E item) {
+        for (int i = 0; i < size; i++) {
+            Node<E> result = findByIndex(i);
             if (result != null) {
-                if (o == result.data) {
+                if (item == result.item) {
                     deleteAtIndex(i);
                     return true;
                 }
@@ -51,7 +90,7 @@ public class SingleLinkedList<E> {
             first = null; // help GC
             first = next;
         } else {
-            Node<E> prev = findNodeAtIndex(index - 1);
+            Node<E> prev = findByIndex(index - 1);
             if (prev == null) {
                 return;
             }
@@ -68,7 +107,7 @@ public class SingleLinkedList<E> {
             first = new Node<>(val, first);
         } else {
             // 当索引大于零时，查到当前索引的上一个节点
-            Node<E> prev = findNodeAtIndex(index - 1);
+            Node<E> prev = findByIndex(index - 1);
             if (prev == null) {
                 return;
             }
@@ -87,9 +126,9 @@ public class SingleLinkedList<E> {
                 node = node.next;
             }
             if (i != size - 1) {
-                result.append(node.data).append(",");
+                result.append(node.item).append(",");
             } else {
-                result.append(node.data);
+                result.append(node.item);
             }
         }
         return result.toString();
@@ -102,7 +141,7 @@ public class SingleLinkedList<E> {
 
 
     // 循环遍历 index 所在节点
-    private Node<E> findNodeAtIndex(int index) {
+    private Node<E> findByIndex(int index) {
         if (!rangeCheck(index)) {
             return null;
         }
@@ -115,21 +154,21 @@ public class SingleLinkedList<E> {
 
 
     private static class Node<E> {
-        private E data;
+        private E item;
         private Node<E> next;
 
         /**
          * 初始化头节点
          */
-        public Node(E data) {
-            this.data = data;
+        public Node(E item) {
+            this.item = item;
         }
 
         /**
          * 初始化非头部节点
          */
-        public Node(E data, Node<E> next) {
-            this(data);
+        public Node(E item, Node<E> next) {
+            this(item);
             this.next = next;
         }
     }
@@ -143,25 +182,14 @@ public class SingleLinkedList<E> {
         list.addTail("e");
         list.addTail("f");
 
+        System.out.println(list.toString());
+        System.out.println("--- Method remove ---");
+        System.out.println(list.remove("b"));
         System.out.println(list.size);
         System.out.println(list.toString());
-        list.deleteAtIndex(0);
+        System.out.println("--- Method delete ---");
+        System.out.println(list.delete("f"));
         System.out.println(list.size);
         System.out.println(list.toString());
-        list.deleteAtIndex(1);
-        System.out.println(list.size);
-        System.out.println(list.toString());
-        list.deleteAtIndex(list.size - 1);
-        System.out.println(list.size);
-        System.out.println(list.toString());
-//
-//        SingleLinkedList<Integer> linkedList = new SingleLinkedList<>();
-//        linkedList.addTail(1);
-//        linkedList.addTail(2);
-//        linkedList.addTail(3);
-//        linkedList.addTail(4);
-//        linkedList.addTail(5);
-//
-//        System.out.println(linkedList.toString());
     }
 }
