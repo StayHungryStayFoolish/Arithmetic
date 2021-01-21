@@ -91,7 +91,7 @@ public class SingleLinkedList<E> {
             first = next;
         } else {
             Node<E> prev = findByIndex(index - 1);
-            if (prev == null) {
+            if (prev == null || prev.next == null) {
                 return;
             }
             Node<E> next = prev.next;
@@ -102,6 +102,9 @@ public class SingleLinkedList<E> {
     }
 
     private void addAtIndex(int index, E val) {
+        if(!rangeCheck(index)){
+            return;
+        }
         // 当 index 为负数或零时，添加到头部
         if (index <= 0) {
             first = new Node<>(val, first);
@@ -136,7 +139,7 @@ public class SingleLinkedList<E> {
 
     // 合法索引校验
     private boolean rangeCheck(int index) {
-        return !(index < 0 || index > size - 1);
+        return !(index < 0 || index > size );
     }
 
 
@@ -190,6 +193,8 @@ public class SingleLinkedList<E> {
         System.out.println("--- Method delete ---");
         System.out.println(list.delete("f"));
         System.out.println(list.size);
+        System.out.println(list.toString());
+        list.deleteAtIndex(list.size);
         System.out.println(list.toString());
     }
 }
