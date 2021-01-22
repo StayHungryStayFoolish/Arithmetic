@@ -8,7 +8,6 @@ package ink.bonismo.notebook.arithmetic.data_structure;
  * 1. 添加节点，需要根据初始节点和非初始节点两种情况操作
  * 2. 删除节点，操作 prev node，设置 prev.next = null，并且将 prev next 指针修改为删除节点的下一个指针
  * 3. 查找节点，根据初始节点一次遍历
- * @param <E>
  */
 public class SingleLinkedList<E> {
 
@@ -82,7 +81,7 @@ public class SingleLinkedList<E> {
     }
 
     public void deleteAtIndex(int index) {
-        if (!rangeCheck(index)) {
+        if (!checkElementIndex(index)) {
             return;
         }
         if (index == 0) {
@@ -102,7 +101,7 @@ public class SingleLinkedList<E> {
     }
 
     private void addAtIndex(int index, E val) {
-        if(!rangeCheck(index)){
+        if (!checkPositionIndex(index)) {
             return;
         }
         // 当 index 为负数或零时，添加到头部
@@ -137,15 +136,20 @@ public class SingleLinkedList<E> {
         return result.toString();
     }
 
-    // 合法索引校验
-    private boolean rangeCheck(int index) {
-        return !(index < 0 || index > size );
+    // 校验索引
+    private boolean checkElementIndex(int index) {
+        return index >= 0 && index < size;
+    }
+
+    // 校验元素索引
+    private boolean checkPositionIndex(int index) {
+        return index >= 0 && index <= size;
     }
 
 
     // 循环遍历 index 所在节点
     private Node<E> findByIndex(int index) {
-        if (!rangeCheck(index)) {
+        if (!checkElementIndex(index)) {
             return null;
         }
         Node<E> node = first;
