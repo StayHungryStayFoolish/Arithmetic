@@ -101,16 +101,17 @@ public class DoublyLinkedList<E> {
             return false;
         }
         if (index == 0) {
-            ListNode<E> f = first;
             // fist 为空，则是空链表，直接返回
             if (first == null) {
                 return true;
                 // 链表不为空
             } else {
+                ListNode<E> f = first;
+                ListNode<E> next = f.next;
                 first = null; // help GC
                 // 将第二个节点赋值到 first，并前驱指针设置为null
-                first = f.next;
-                first.prev = null;
+                first = next;
+                next.prev = null;
                 size--;
                 return true;
             }
