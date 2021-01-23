@@ -68,14 +68,17 @@ public class DoublyLinkedList<E> {
 //        System.out.println(doublyList.getLast());
 //        System.out.println(doublyList.size);
 
-        doublyList.addFirst("a");
-        doublyList.addFirst("b");
-//        doublyList.addFirst("c");
-//        doublyList.addFirst("d");
+        doublyList.add("a");
+        doublyList.add("b");
+        doublyList.add("c");
+        doublyList.add("d");
         System.out.println(doublyList.size);
         System.out.println(doublyList.getFirst());
         System.out.println(doublyList.getLast());
-        System.out.println(doublyList.deleteAtIndex(0));
+        System.out.println(doublyList.toString());
+        System.out.println("-------");
+        System.out.println(doublyList.delete("c"));
+        System.out.println(doublyList.toString());
     }
 
     private int size;
@@ -90,12 +93,57 @@ public class DoublyLinkedList<E> {
         return last.item;
     }
 
+    public void add(E item) {
+        addAtIndex(size, item);
+    }
+
     public void addFirst(E item) {
         addAtIndex(0, item);
     }
 
     public void addLast(E item) {
         addAtIndex(size, item);
+    }
+
+    public boolean delete(E item) {
+        if (checkLinkedNull()) {
+            return false;
+        }
+        if (item == first.item) {
+            ListNode<E> next = first.next;
+            if (null == next) {
+                first = null;
+                last = null;
+            } else {
+                first = null;
+                first = next;
+                next.prev = null;
+            }
+            size--;
+            return true;
+        }
+        if (item == last.item) {
+            ListNode<E> prev = last.prev;
+            last = null;
+            last = prev;
+            prev.next = null;
+            size--;
+            return true;
+        }
+        ListNode<E> succ = first;
+        for (int i = 1; i < size - 1; i++) {
+            succ = succ.next;
+            if (item == succ.item) {
+                ListNode<E> pred = succ.prev;
+                ListNode<E> next = succ.next;
+                succ = null;
+                pred.next = next;
+                next.prev = pred;
+                size--;
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean deleteAtIndex(int index) {
@@ -171,7 +219,7 @@ public class DoublyLinkedList<E> {
             succ.prev = newNode;
             pred.next = newNode;
             // 尾部插入节点
-        } else if (index == size && size != 0) {
+        } else if (index == size && size > 0) {
             ListNode<E> succ = last;
             ListNode<E> newNode = new ListNode<>(succ, item, null);
             last = newNode;
@@ -206,12 +254,38 @@ public class DoublyLinkedList<E> {
         }
     }
 
+    private boolean checkLinkedNull() {
+        return first == null && last == null;
+    }
+
     private boolean checkElementIndex(int index) {
         return index >= 0 && index < size;
     }
 
     private boolean checkPositionIndex(int index) {
         return index >= 0 && index <= size;
+    }
+
+    public String toString() {
+        if (checkLinkedNull()) {
+            return null;
+        }
+        StringBuffer result = new StringBuffer();
+        ListNode<E> node = first;
+        for (int i = 0; i < size; i++) {
+            if (i == 0) {
+                result.append("DoublyLinkedList size : [ ").append(size).append(" ], toString [ ").append(node.item);
+                if (size == 1) {
+                    result.append(" ].");
+                }
+            } else if (0 < i && i < (size - 1)) {
+                result.append(", ").append(node.item);
+            } else if (i == size - 1) {
+                result.append(", ").append(node.item).append(" ].");
+            }
+            node = node.next;
+        }
+        return result.toString();
     }
 
     private static class ListNode<E> {
