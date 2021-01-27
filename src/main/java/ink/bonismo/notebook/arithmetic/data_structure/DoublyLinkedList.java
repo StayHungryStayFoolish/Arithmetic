@@ -77,7 +77,7 @@ public class DoublyLinkedList<E> {
         System.out.println(doublyList.getLast());
         System.out.println(doublyList.toString());
         System.out.println("-------");
-        System.out.println(doublyList.delete("c"));
+        System.out.println(doublyList.deleteAtIndex(2));
         System.out.println(doublyList.toString());
     }
 
@@ -150,26 +150,21 @@ public class DoublyLinkedList<E> {
         if (!checkElementIndex(index)) {
             return false;
         }
+        if (checkLinkedNull()){
+            return false;
+        }
         if (index == 0) {
-            // fist 为空，则是空链表，直接返回
-            if (first == null) {
-                return true;
-                // 链表不为空
+            ListNode<E> next = first.next;
+            first = null; // help GC
+            if (null == next) {
+                last = null;
             } else {
-                ListNode<E> f = first;
-                ListNode<E> next = f.next;
-                if (null == next) {
-                    first = null;
-                    last = null;
-                } else {
-                    first = null; // help GC
-                    // 将第二个节点赋值到 first，并前驱指针设置为null
-                    first = next;
-                    next.prev = null;
-                }
-                size--;
-                return true;
+                // 将第二个节点赋值到 first，并前驱指针设置为null
+                first = next;
+                next.prev = null;
             }
+            size--;
+            return true;
         } else {
             ListNode<E> succ = findAtIndex(index);
             ListNode<E> pred = succ.prev;
